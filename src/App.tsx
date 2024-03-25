@@ -12,17 +12,17 @@ import { Text } from "@chakra-ui/react";
 import { Input, InputGroup, InputLeftElement, Stack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-import { KeyboardEvent } from "react";
-import { KeyboardEventHandler } from "react";
+// import { KeyboardEvent } from "react";
+// import { KeyboardEventHandler } from "react";
 
 const API_URL = "na1.api.riotgames.com";
 // const API_KEY = process.env.REACT_APP_API_KEY;
 
 
-let iconID = 0;
+// let iconID = 0;
 
 //This line must be removed!
-let iconURL = `http://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${iconID}.png`;
+// let iconURL = `http://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${iconID}.png`;
 
 export default function App() {
   const [summonerData, setSummonerData] = useState<SummonerData | null>(null);
@@ -67,15 +67,15 @@ export default function App() {
       const fetchData = async () => {
         try {
           const summonerResponse = await fetch(
-            `https://${API_URL}/lol/summoner/v4/summoners/by-name/${textInput}?api_key=${API_KEY}`
+            `https://${API_URL}/lol/summoner/v4/summoners/by-name/${textInput}?api_key=${process.env.API_KEY}`
           );
           const summonerJson = await summonerResponse.json();
           setSummonerData(summonerJson);
-          iconID = summonerJson.profileIconId;
-          iconURL = `http://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${iconID}.png`;
+          // iconID = summonerJson.profileIconId;
+          // iconURL = `http://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${iconID}.png`;
 
           const leagueResponse = await fetch(
-            `https://${API_URL}/lol/league/v4/entries/by-summoner/${summonerJson.id}?api_key=${API_KEY}`
+            `https://${API_URL}/lol/league/v4/entries/by-summoner/${summonerJson.id}?api_key=${process.env.API_KEY}`
           );
           const leagueJson = await leagueResponse.json();
           setLeagueData(leagueJson);
