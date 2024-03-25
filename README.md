@@ -41,5 +41,3 @@ https://chakra-ui.com/getting-started/vite-guide
 
 
 https://www.npmjs.com/package/react-icons
-
-dotenv-webpack

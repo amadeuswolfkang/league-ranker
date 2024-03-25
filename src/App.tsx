@@ -67,7 +67,7 @@ export default function App() {
       const fetchData = async () => {
         try {
           const summonerResponse = await fetch(
-            `https://${API_URL}/lol/summoner/v4/summoners/by-name/${textInput}?api_key=${process.env.API_KEY}`
+            `https://${API_URL}/lol/summoner/v4/summoners/by-name/${textInput}?api_key=${import.meta.env.API_KEY}`
           );
           const summonerJson = await summonerResponse.json();
           setSummonerData(summonerJson);
@@ -75,7 +75,7 @@ export default function App() {
           // iconURL = `http://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${iconID}.png`;
 
           const leagueResponse = await fetch(
-            `https://${API_URL}/lol/league/v4/entries/by-summoner/${summonerJson.id}?api_key=${process.env.API_KEY}`
+            `https://${API_URL}/lol/league/v4/entries/by-summoner/${summonerJson.id}?api_key=${import.meta.env.API_KEY}`
           );
           const leagueJson = await leagueResponse.json();
           setLeagueData(leagueJson);
