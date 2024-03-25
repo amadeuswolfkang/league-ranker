@@ -177,6 +177,8 @@ export default function App() {
       {renderSummonerData()}
       {renderLeagueRanks()}
 
+
+
       {/* <pre>{JSON.stringify(leagueData, null, 2)}</pre> */}
     </>
   );
