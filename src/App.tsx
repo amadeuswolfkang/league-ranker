@@ -11,6 +11,7 @@ import { Text } from "@chakra-ui/react";
 
 import { Input, InputGroup, InputLeftElement, Stack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import React, { useRef } from 'react';
 import { Spinner } from "@chakra-ui/react";
 
 // import { KeyboardEvent } from "react";
@@ -29,13 +30,13 @@ export default function App() {
   const [leagueData, setLeagueData] = useState<LeagueData[]>([]);
   const [textInput, setTextInput] = useState("");
   const [spinner, setSpinner] = useState(false);
+  const inputValueRef = useRef('');
 
   const handleButtonClick = () => {
     // get the input field's value
-    const inputValue = (
-      document.getElementById("playerName") as HTMLInputElement
-    )?.value;
-    setTextInput(inputValue || "");
+    setSummonerData(null);
+    setLeagueData([]);
+    setTextInput(inputValueRef.current);
   };
 
   const handleKeyPress: React.KeyboardEventHandler<HTMLInputElement> = (
@@ -171,6 +172,7 @@ export default function App() {
             placeholder="Player"
             id="playerName"
             onKeyUp={handleKeyPress}
+            onChange={e => { inputValueRef.current = e.target.value; }}
           />
         </InputGroup>
         <Button
