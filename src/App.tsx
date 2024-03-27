@@ -195,7 +195,6 @@ export default function App() {
 
   return (
     <>
-      <header className="navbar"> </header>
       <Stack spacing={4}>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
