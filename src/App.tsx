@@ -29,7 +29,7 @@ export default function App() {
   const [summonerData, setSummonerData] = useState<SummonerData | null>(null);
   const [leagueData, setLeagueData] = useState<LeagueData[]>([]);
   const [textInput, setTextInput] = useState("");
-  const [spinner, setSpinner] = useState(false);
+  const [loading, setLoading] = useState(false);
   const inputValueRef = useRef("");
 
   const handleButtonClick = () => {
@@ -55,6 +55,7 @@ export default function App() {
     }
   };
 
+  // TYPE DEFINITIONS FOR API RESPONSES
   type LeagueData = {
     queueType: string;
     tier: string;
@@ -64,11 +65,9 @@ export default function App() {
     leaguePoints: number;
   };
 
-  // type annotation
   type SummonerData = {
     name: string;
     summonerLevel: number;
-    // include other properties as needed
   };
 
   useEffect(() => {
@@ -76,7 +75,7 @@ export default function App() {
     if (textInput.length >= 3 && textInput.length <= 16) {
       const fetchData = async () => {
         try {
-          setSpinner(true);
+          setLoading(true);
           const summonerResponse = await fetch(
             `https://${API_URL}/lol/summoner/v4/summoners/by-name/${textInput}?api_key=${
               import.meta.env.VITE_API_KEY
@@ -94,11 +93,11 @@ export default function App() {
           );
           const leagueJson = await leagueResponse.json();
           setLeagueData(leagueJson);
-          console.log(leagueData);
+          console.log("League data", leagueData);
         } catch (error) {
           console.error(error);
         } finally {
-          setSpinner(false);
+          setLoading(false);
         }
       };
 
@@ -107,12 +106,18 @@ export default function App() {
   }, [textInput]);
 
   function renderSummonerData() {
+    if (loading) {
+      return (
+        <div>
+          <Spinner />
+          <pre>Loading player data</pre>
+        </div>
+      );
+    }
+
     if (summonerData && summonerData.name !== "Undefined") {
       return (
         <div>
-          {/* Debugging */}
-          {/* summonerData:
-          <pre>{JSON.stringify(summonerData, null, 2)}</pre> */}
           <Text fontSize="3xl" fontWeight="bold">
             {summonerData.name}
           </Text>
@@ -121,7 +126,10 @@ export default function App() {
           </Text>
         </div>
       );
-    } else if (textInput) {
+    }
+
+    // Checks for text input to prevent error message when input is empty
+    if (textInput) {
       return <pre>No player data found.</pre>;
     }
   }
@@ -164,21 +172,30 @@ export default function App() {
   }
 
   function renderLeagueRanks(): React.ReactNode {
-    if (spinner) {
-      return <pre>Loading league ranks...</pre>;
+    if (loading) {
+      return (
+        <div>
+          <Spinner />
+          <pre>Loading league rank data</pre>
+        </div>
+      );
     }
 
-    if (summonerData) {
+    if (leagueData.length > 0) {
+      console.log('Rendering league data.');
       return leagueData.map((data, i) => <LeagueCard key={i} data={data} />);
     }
 
+    // Checks for text input to prevent error message when input is empty
     if (textInput) {
+      console.log('No rank data found.');
       return <pre>No rank data found.</pre>;
     }
   }
 
   return (
     <>
+      <header className="navbar"> </header>
       <Stack spacing={4}>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
@@ -203,13 +220,9 @@ export default function App() {
         </Button>
       </Stack>
 
-      {renderSummonerData()}
+      <div>{renderSummonerData()}</div>
 
-      <div className="output">
-        {renderLeagueRanks()}
-        {spinner ? <Spinner /> : null}
-        {/* rest of your component */}
-      </div>
+      <div className="output">{renderLeagueRanks()}</div>
 
       {/* <pre>{JSON.stringify(leagueData, null, 2)}</pre> */}
     </>

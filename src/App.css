@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+.navbar {
+  background-color: blue;
+  min-height: 5rem;
+}
