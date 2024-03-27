@@ -120,13 +120,9 @@ export default function App() {
     }
   }
 
-  function renderLeagueRanks(): React.ReactNode {
-    if (!leagueData || leagueData.length === 0) {
-      return textInput ? <pre>No rank data found.</pre> : null;
-    }
-
-    return leagueData.map((data, i) => (
-      <div key={i}>
+  function LeagueCard({ data }: { data: LeagueData }) {
+    return (
+      <div>
         <Card marginBottom="1rem">
           <CardBody>
             <Text fontSize="2xl" align="center" fontWeight="bold">
@@ -158,12 +154,25 @@ export default function App() {
           </CardBody>
         </Card>
       </div>
-    ));
+    );
+  }
+
+  function renderLeagueRanks(): React.ReactNode {
+    if (spinner) {
+      return <pre>Loading league ranks...</pre>;
+    }
+  
+    if (summonerData) {
+      return leagueData.map((data, i) => <LeagueCard key={i} data={data} />);
+    }
+  
+    if (textInput) {
+      return <pre>No rank data found.</pre>;
+    }
   }
 
   return (
     <>
-      {/* // Search field and button */}
       <Stack spacing={4}>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
@@ -189,8 +198,9 @@ export default function App() {
       </Stack>
 
       {renderSummonerData()}
-      {renderLeagueRanks()}
-      <div>
+
+      <div className="output">
+        {renderLeagueRanks()}
         {spinner ? <Spinner /> : null}
         {/* rest of your component */}
       </div>
