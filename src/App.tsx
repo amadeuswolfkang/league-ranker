@@ -197,12 +197,9 @@ export default function App() {
     <>
       <Stack spacing={4}>
         <InputGroup>
-          <InputLeftElement pointerEvents="none">
-            <Icon as={IoPersonCircleSharp} color="gray.300" fontSize="1.5em" />
-          </InputLeftElement>
           <Input
             variant="outline"
-            placeholder="Player"
+            placeholder="Search a player"
             id="playerName"
             onKeyUp={handleKeyPress}
             onChange={(e) => {
