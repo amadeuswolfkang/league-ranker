@@ -33,9 +33,12 @@ export default function App() {
   const inputValueRef = useRef("");
 
   const handleButtonClick = () => {
-    // get the input field's value
-    setSummonerData(null);
-    setLeagueData([]);
+    // Preserve data if same search, clear data for new search
+    if (textInput != inputValueRef.current) {
+      setSummonerData(null);
+      setLeagueData([]);
+    }
+
     setTextInput(inputValueRef.current);
   };
 
@@ -43,8 +46,11 @@ export default function App() {
     event
   ) => {
     if (event.key === "Enter") {
-      setSummonerData(null);
-      setLeagueData([]);
+      // Preserve data if same search, clear data for new search
+      if (textInput != inputValueRef.current) {
+        setSummonerData(null);
+        setLeagueData([]);
+      }
       setTextInput(event.currentTarget.value);
     }
   };
@@ -161,11 +167,11 @@ export default function App() {
     if (spinner) {
       return <pre>Loading league ranks...</pre>;
     }
-  
+
     if (summonerData) {
       return leagueData.map((data, i) => <LeagueCard key={i} data={data} />);
     }
-  
+
     if (textInput) {
       return <pre>No rank data found.</pre>;
     }
