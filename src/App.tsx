@@ -1,29 +1,9 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import React, { useEffect, useState, useRef } from "react";
+import { Button, Card, CardBody, Text, Input, InputGroup, Stack, Spinner } from "@chakra-ui/react";
 
 import "./App.css";
 
-import { Button, Card, CardBody, Icon } from "@chakra-ui/react";
-import { IoPersonCircleSharp } from "react-icons/io5";
-
-import { Text } from "@chakra-ui/react";
-
-import { Input, InputGroup, InputLeftElement, Stack } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import React, { useRef } from "react";
-import { Spinner } from "@chakra-ui/react";
-
-// import { KeyboardEvent } from "react";
-// import { KeyboardEventHandler } from "react";
-
 const API_URL = "na1.api.riotgames.com";
-// const API_KEY = process.env.REACT_APP_API_KEY;
-
-// let iconID = 0;
-
-//This line must be removed!
-// let iconURL = `http://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${iconID}.png`;
 
 export default function App() {
   const [summonerData, setSummonerData] = useState<SummonerData | null>(null);
@@ -83,8 +63,6 @@ export default function App() {
           );
           const summonerJson = await summonerResponse.json();
           setSummonerData(summonerJson);
-          // iconID = summonerJson.profileIconId;
-          // iconURL = `http://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${iconID}.png`;
 
           const leagueResponse = await fetch(
             `https://${API_URL}/lol/league/v4/entries/by-summoner/${
@@ -182,13 +160,13 @@ export default function App() {
     }
 
     if (leagueData.length > 0) {
-      console.log('Rendering league data.');
+      console.log("Rendering league data.");
       return leagueData.map((data, i) => <LeagueCard key={i} data={data} />);
     }
 
     // Checks for text input to prevent error message when input is empty
     if (textInput) {
-      console.log('No rank data found.');
+      console.log("No rank data found.");
       return <pre>No rank data found.</pre>;
     }
   }
@@ -219,8 +197,6 @@ export default function App() {
       <div>{renderSummonerData()}</div>
 
       <div className="output">{renderLeagueRanks()}</div>
-
-      {/* <pre>{JSON.stringify(leagueData, null, 2)}</pre> */}
     </>
   );
 }
