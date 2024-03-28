@@ -8,22 +8,10 @@ import {
   InputGroup,
   Stack,
   Spinner,
-  extendTheme,
   Heading,
 } from "@chakra-ui/react";
 
 import "./App.css";
-
-const theme = extendTheme({
-  styles: {
-    global: {
-      // styles for the `body`
-      body: {
-        width: "100%",
-      },
-    },
-  },
-});
 
 const API_URL = "na1.api.riotgames.com";
 
