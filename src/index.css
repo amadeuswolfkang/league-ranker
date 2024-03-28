@@ -24,10 +24,16 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+  /* display: flex; */
   min-width: 320px;
   min-height: 100vh;
   height: 100vh;
+}
+
+header {
+  height: 5rem;
+  background-color: var(--chakra-colors-blue-500);
+  margin-bottom: 5rem;
 }
 
 h1 {

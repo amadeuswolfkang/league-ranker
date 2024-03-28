@@ -1,7 +1,29 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Button, Card, CardBody, Text, Input, InputGroup, Stack, Spinner } from "@chakra-ui/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  Text,
+  Input,
+  InputGroup,
+  Stack,
+  Spinner,
+  extendTheme,
+  Heading,
+} from "@chakra-ui/react";
 
 import "./App.css";
+
+const theme = extendTheme({
+  styles: {
+    global: {
+      // styles for the `body`
+      body: {
+        width: "100%",
+      },
+    },
+  },
+});
 
 const API_URL = "na1.api.riotgames.com";
 
@@ -96,10 +118,10 @@ export default function App() {
     if (summonerData && summonerData.name !== "Undefined") {
       return (
         <div>
-          <Text fontSize="3xl" fontWeight="bold">
+          <Text fontSize="3xl" fontWeight="bold" textAlign="center">
             {summonerData.name}
           </Text>
-          <Text fontSize="1xl" marginBottom="1rem">
+          <Text fontSize="1xl" marginBottom="1rem" textAlign="center">
             Level {summonerData.summonerLevel}
           </Text>
         </div>
@@ -173,30 +195,37 @@ export default function App() {
 
   return (
     <>
-      <Stack spacing={4}>
-        <InputGroup>
-          <Input
-            variant="outline"
-            placeholder="Search a player"
-            id="playerName"
-            onKeyUp={handleKeyPress}
-            onChange={(e) => {
-              inputValueRef.current = e.target.value;
-            }}
-          />
-        </InputGroup>
-        <Button
-          onClick={handleButtonClick}
-          colorScheme="blue"
-          marginBottom="1rem"
-        >
-          Search
-        </Button>
-      </Stack>
+      <header className="navbar">
+        <Heading as="h1" margin="auto" color="white">
+          Leagueranker
+        </Heading>
+      </header>
+      <div className="section">
+        <Stack spacing={4}>
+          <InputGroup>
+            <Input
+              variant="outline"
+              placeholder="Search a player"
+              id="playerName"
+              onKeyUp={handleKeyPress}
+              onChange={(e) => {
+                inputValueRef.current = e.target.value;
+              }}
+            />
+          </InputGroup>
+          <Button
+            onClick={handleButtonClick}
+            colorScheme="blue"
+            marginBottom="1rem"
+          >
+            Search
+          </Button>
+        </Stack>
 
-      <div>{renderSummonerData()}</div>
+        <div>{renderSummonerData()}</div>
 
-      <div className="output">{renderLeagueRanks()}</div>
+        <div className="output">{renderLeagueRanks()}</div>
+      </div>
     </>
   );
 }
