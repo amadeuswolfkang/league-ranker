@@ -96,9 +96,9 @@ export default function App() {
   function renderSummonerData() {
     if (loading) {
       return (
-        <div>
-          <Spinner />
-          <pre>Loading player data</pre>
+        <div style={{ textAlign: "center" }}>
+          <Spinner margin="1rem"/>
+          <p>Loading player data...</p>
         </div>
       );
     }
@@ -118,7 +118,11 @@ export default function App() {
 
     // Checks for text input to prevent error message when input is empty
     if (textInput) {
-      return <pre>No player data found.</pre>;
+      return (
+        <div style={{ textAlign: "center" }}>
+          <p>No player data found.</p>
+        </div>
+      );
     }
   }
 
@@ -162,9 +166,9 @@ export default function App() {
   function renderLeagueRanks(): React.ReactNode {
     if (loading) {
       return (
-        <div>
-          <Spinner />
-          <pre>Loading league rank data</pre>
+        <div style={{ textAlign: "center" }}>
+          <Spinner margin="1rem"/>
+          <p>Loading league rank data...</p>
         </div>
       );
     }
@@ -177,16 +181,23 @@ export default function App() {
     // Checks for text input to prevent error message when input is empty
     if (textInput) {
       console.log("No rank data found.");
-      return <pre>No rank data found.</pre>;
+      return <p style={{ textAlign: "center" }}>No rank data found.</p>;
     }
   }
-
-
 
   return (
     <>
       <header className="navbar">
-        <Heading as="h1" marginBottom="5rem" color="white" height="5rem" backgroundColor="var(--chakra-colors-blue-500)" display="flex" alignItems="center" justifyContent="center">
+        <Heading
+          as="h1"
+          marginBottom="5rem"
+          color="white"
+          height="5rem"
+          backgroundColor="var(--chakra-colors-blue-500)"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
           Leagueranker
         </Heading>
       </header>
