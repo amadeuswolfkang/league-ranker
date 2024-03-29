@@ -30,15 +30,6 @@ body {
   height: 100vh;
 }
 
-header {
-  /* height: 5rem;
-  background-color: var(--chakra-colors-blue-500);
-  margin-bottom: 5rem; */
-/* 
-  display: grid; */
-  align-self: center;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

@@ -97,7 +97,7 @@ export default function App() {
     if (loading) {
       return (
         <div style={{ textAlign: "center" }}>
-          <Spinner margin="1rem"/>
+          <Spinner margin="1rem" />
           <p>Loading player data...</p>
         </div>
       );
@@ -167,7 +167,7 @@ export default function App() {
     if (loading) {
       return (
         <div style={{ textAlign: "center" }}>
-          <Spinner margin="1rem"/>
+          <Spinner margin="1rem" />
           <p>Loading league rank data...</p>
         </div>
       );
