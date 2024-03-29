@@ -181,10 +181,12 @@ export default function App() {
     }
   }
 
+
+
   return (
     <>
       <header className="navbar">
-        <Heading as="h1" margin="auto" color="white">
+        <Heading as="h1" marginBottom="5rem" color="white" height="5rem" backgroundColor="var(--chakra-colors-blue-500)" display="flex" alignItems="center" justifyContent="center">
           Leagueranker
         </Heading>
       </header>
